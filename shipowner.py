@@ -3,13 +3,10 @@ import common
 
 # 写入船东一行数据
 def write_sheet_data(wb, row, row_idx, obj):
-    if row_idx < 2 or row[0] == '':
-        return
-    else:
-        # 根据索引获取指定sheet
-        sheet = wb.worksheets[2]
+    # 根据索引获取指定sheet
+    sheet = wb.worksheets[2]
 
-        if row_idx > 1:
+    if row_idx > 1:
             if row[3] == '' and row[4] == '':
                 # 插入一行新的
                 common.copy_row(sheet, obj, 1)

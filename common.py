@@ -1,12 +1,22 @@
 
 import os
 import copy
+import re
 
 # 计数器类
 class row_object:
     def __init__(self, row_index, count):
         self.count = count
         self.rowIndex = row_index
+
+
+# 定义匹配中文数字的正则表达式
+pattern = re.compile(r'^[一二三四五六七八九十百千万亿]+$', re.UNICODE)
+
+
+# 判断输入字符串是否为中文数字
+def is_chinese_number(s):
+    return bool(pattern.match(s))
 
 
 # 获取文件名称

@@ -1,10 +1,12 @@
 import os
-import xlrd
+import xlrd2
 from openpyxl import load_workbook
 import common
 import shipyard
 import shipowner
 import inspection
+
+
 
 op_flag = True
 while op_flag:
@@ -33,7 +35,7 @@ while op_flag:
                         file_name = common.get_file_name(xls_path)
 
                         # 传入Excel文件路径打开文件
-                        workbook = xlrd.open_workbook(xls_path)
+                        workbook = xlrd2.open_workbook(xls_path)
                         worksheet = workbook.sheet_by_name('滚动表')
 
                         if worksheet:
@@ -43,14 +45,20 @@ while op_flag:
                             my_inspection = common.row_object(6, 1)
                             # 创建一个对象并设置属性
                             my_shipowner = common.row_object(6, 1)
+                            # 是否开始处理
+                            is_start = False
                             for row_idx in range(worksheet.nrows):
                                 row = worksheet.row_values(row_idx)
-                                # 写入船厂
-                                shipyard.write_sheet_data(wb, row, row_idx, my_shipyard)
-                                # 写入船检
-                                inspection.write_sheet_data(wb, row, row_idx, my_inspection)
-                                # 写入船东
-                                shipowner.write_sheet_data(wb, row, row_idx, my_shipowner)
+                                if not is_start and common.is_chinese_number(row[1]) and row[0].isalpha():
+                                    is_start = True
+
+                                # 写入
+                                if is_start:
+                                    shipyard.write_sheet_data(wb, row, row_idx, my_shipyard)
+                                    # 写入船检
+                                    inspection.write_sheet_data(wb, row, row_idx, my_inspection)
+                                    # 写入船东
+                                    shipowner.write_sheet_data(wb, row, row_idx, my_shipowner)
 
                         # 不存在 output 则创建
                         save_file_path = filePath + "\\output"
@@ -66,6 +74,3 @@ while op_flag:
                 print(f"文件夹中没有相关文件！")
     except Exception as err:
         print(f"异常了，错误信息: ${err}")
-
-
-
