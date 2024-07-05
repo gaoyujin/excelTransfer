@@ -49,6 +49,9 @@ while op_flag:
                             is_start = False
                             for row_idx in range(worksheet.nrows):
                                 row = worksheet.row_values(row_idx)
+
+                                if()
+
                                 if not is_start and common.is_chinese_number(row[1]) and row[0].isalpha():
                                     is_start = True
 
