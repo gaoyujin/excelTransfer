@@ -1,4 +1,5 @@
 import common
+from openpyxl.worksheet.pagebreak import Break
 
 
 # 写入船检一行数据
@@ -15,6 +16,12 @@ def write_sheet_data(wb, row, row_idx, obj):
                 common.copy_row(sheet, obj, 1)
 
                 obj.rowIndex = obj.rowIndex + 1
+
+                if obj.rowIndex > 10:
+                    page_break = Break(obj.rowIndex - 2)  # 创建分页对象
+                    # 其中i或者j为行号或者列号
+                    sheet.row_breaks.append(page_break)
+
                 common.write_categories(sheet, row, obj)
                 obj.count = 1
             else:

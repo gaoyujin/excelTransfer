@@ -2,6 +2,8 @@
 import os
 import copy
 import re
+from openpyxl.styles import Font
+
 
 # 计数器类
 class row_object:
@@ -14,9 +16,20 @@ class row_object:
 pattern = re.compile(r'^[一二三四五六七八九十百千万亿]+$', re.UNICODE)
 
 
+def match_roman_numerals(text):
+    roman_numeral_pattern = r'[IVXLCDM]+'
+    matches = re.findall(roman_numeral_pattern, text)
+    return matches
+
+
 # 判断输入字符串是否为中文数字
 def is_chinese_number(s):
-    return bool(pattern.match(s))
+    match = match_roman_numerals(s)
+
+    if match and len(match) > 0:
+        return True
+    else:
+        return bool(pattern.match(s))
 
 
 # 获取文件名称
@@ -52,6 +65,11 @@ def write_categories(sheet, row, obj):
     # 插入一行新的
     sheet['A' + str(obj.rowIndex - 1)] = row[1]
     sheet['B' + str(obj.rowIndex - 1)] = row[2]
+    # 创建一个加粗的字体对象
+    bold_font_a = Font(bold=True)
+    sheet['A' + str(obj.rowIndex - 1)].font = bold_font_a
+    bold_font_b = Font(bold=True)
+    sheet['B' + str(obj.rowIndex - 1)].font = bold_font_b
 
 
 # 写入一行数据
