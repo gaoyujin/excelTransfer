@@ -28,7 +28,7 @@ def init():
 
             print()
 
-            if filePath == '结束':
+            if filePath == '切换':
                 print(f"{Fore.CYAN}老婆大人，处理程序开始切换，请根据提示操作...{Style.RESET_ALL}")
                 op_flag = False
                 raise KeyboardInterrupt
