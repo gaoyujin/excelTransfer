@@ -46,6 +46,7 @@ def init():
 
                 if len(file_list) > 0:
                     last_data = []
+                    set_data = []
                     count = 1
 
                     # 遍历文件
@@ -56,14 +57,21 @@ def init():
                                 xlsFile.endswith(".xlsx") or xlsFile.endswith(".XLSX")):
 
                             file_name = common.get_file_name(xlsFile)
-                            my_data = FileName()
-
                             names = file_name.split("_")
-                            my_data.count = count
-                            my_data.account = names[0]
-                            my_data.name = file_name.replace(names[0] + '_', '')
-                            last_data.append(my_data)
-                            count = count + 1
+
+                            if len(names) < 1:
+                                continue
+
+                            if names[0] in set_data:
+                                continue
+                            else:
+                                set_data.append(names[0])
+                                my_data = FileName()
+                                my_data.count = count
+                                my_data.account = names[0]
+                                my_data.name = file_name.replace(names[0] + '_', '')
+                                last_data.append(my_data)
+                                count = count + 1
 
                     if len(last_data) > 0:
                         # 创建一个新的工作簿（Workbook）对象
