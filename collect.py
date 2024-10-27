@@ -69,7 +69,10 @@ def init():
                                 my_data = FileName()
                                 my_data.count = count
                                 my_data.account = names[0]
-                                my_data.name = file_name.replace(names[0] + '_', '')
+                                my_data.name = (file_name.replace(names[0] + '_', '').
+                                                replace('A_S ', '').replace('A_S_', '').replace('A_S', ''))
+                                my_data.allName = xlsFile
+
                                 last_data.append(my_data)
                                 count = count + 1
 
@@ -94,6 +97,7 @@ def init():
                             sheet['A' + str(row_index)] = item.count
                             sheet['B' + str(row_index)] = item.account
                             sheet['C' + str(row_index)] = item.name
+                            sheet['D' + str(row_index)] = item.allName
                             my_object.rowIndex = my_object.rowIndex + 1
 
                         # 不存在 output 则创建
