@@ -6,3 +6,8 @@
 # 功能
 
 - 根据模板转换 Excel
+
+# 打包
+
+- pyinstaller main.spec
+- 记得拷贝 temp 下的内容
