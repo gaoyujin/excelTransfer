@@ -18,17 +18,17 @@ def init():
 
             if first:
                 print(
-                    f"{Fore.LIGHTGREEN_EX}{Style.BRIGHT}老婆大人，把文件集合目录给我，我来收集图名、图号：{Style.RESET_ALL}")  # 打印蓝色文字
+                    f"{Fore.LIGHTGREEN_EX}{Style.BRIGHT}主人，把文件集合目录给我，我来收集图名、图号：{Style.RESET_ALL}")  # 打印蓝色文字
             else:
                 print()
-                print(f"{Fore.LIGHTGREEN_EX}{Style.BRIGHT}老婆大人，老公我随时准备收集图名、图号：{Style.RESET_ALL}")
+                print(f"{Fore.LIGHTGREEN_EX}{Style.BRIGHT}主人，奴仆我随时准备收集图名、图号：{Style.RESET_ALL}")
 
             first = False
             file_path = input()
 
             if file_path == '切换':
                 print()
-                print(f"{Fore.CYAN}老婆大人，处理程序开始切换，请根据提示操作...{Style.RESET_ALL}")
+                print(f"{Fore.CYAN}主人，处理程序开始切换，请根据提示操作...{Style.RESET_ALL}")
                 op_flag = False
                 raise KeyboardInterrupt
 
@@ -36,10 +36,10 @@ def init():
             if not os.path.exists(file_path):
                 print()
                 print(
-                    f"{Fore.RED}老婆大人，我的能力不够，找不到这个路径，请您惩罚我吧！{Style.RESET_ALL}")
+                    f"{Fore.RED}主人，我的能力不够，找不到这个路径，请您惩罚我吧！{Style.RESET_ALL}")
             else:
                 print()
-                print(f"{Fore.CYAN}老公正在努力劳作，老婆您稍等......{Style.RESET_ALL}")
+                print(f"{Fore.CYAN}奴仆正在努力劳作，主人您稍等......{Style.RESET_ALL}")
                 print()
                 # 读取文件夹中的所有文件
                 file_list = os.listdir(file_path)
@@ -108,14 +108,14 @@ def init():
                         save_path = file_path + "\\collect_output\\" + "送审文件图名图号集合.xlsx"
                         wb.save(save_path)
 
-                    print(f"{Fore.LIGHTBLACK_EX}{Style.BRIGHT}老婆大人，收集图名、图号完成了：{file_path}{Style.RESET_ALL}")
+                    print(f"{Fore.LIGHTBLACK_EX}{Style.BRIGHT}主人，收集图名、图号完成了：{file_path}{Style.RESET_ALL}")
                 else:
                     print(
-                        f"{Fore.RED}老婆大人，您真好，路径下面是空的，是不是担心老公太累了？{Style.RESET_ALL}")
+                        f"{Fore.RED}主人，您真好，路径下面是空的，是不是担心奴仆太累了？{Style.RESET_ALL}")
         except KeyboardInterrupt:
             raise KeyboardInterrupt
 
         except Exception as err:
             print(
-                f"{Fore.RED}老婆大人，不好了，老公的程序异常了，错误信息: ${err}{Style.RESET_ALL}")
+                f"{Fore.RED}主人，不好了，奴仆的程序异常了，错误信息: ${err}{Style.RESET_ALL}")
 

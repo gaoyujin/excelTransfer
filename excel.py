@@ -18,10 +18,10 @@ def init():
 
             if first:
                 print(
-                    f"{Fore.LIGHTGREEN_EX}{Style.BRIGHT}老婆大人，把那烦人的文件路径给我，让我给您搞定它：{Style.RESET_ALL}")  # 打印蓝色文字
+                    f"{Fore.LIGHTGREEN_EX}{Style.BRIGHT}主人，把那烦人的文件路径给我，让我给您搞定它：{Style.RESET_ALL}")  # 打印蓝色文字
             else:
                 print()
-                print(f"{Fore.LIGHTGREEN_EX}{Style.BRIGHT}老婆大人，老公我随时给您效劳：{Style.RESET_ALL}")
+                print(f"{Fore.LIGHTGREEN_EX}{Style.BRIGHT}主人，奴仆我随时给您效劳：{Style.RESET_ALL}")
 
             first = False
             filePath = input()
@@ -29,14 +29,14 @@ def init():
             print()
 
             if filePath == '切换':
-                print(f"{Fore.CYAN}老婆大人，处理程序开始切换，请根据提示操作...{Style.RESET_ALL}")
+                print(f"{Fore.CYAN}主人，处理程序开始切换，请根据提示操作...{Style.RESET_ALL}")
                 op_flag = False
                 raise KeyboardInterrupt
 
             # 路径不存在
             if not os.path.exists(filePath):
                 print(
-                    f"{Fore.RED}老婆大人，我的能力不够，找不到这个路径，请您惩罚我吧！{Style.RESET_ALL}")
+                    f"{Fore.RED}主人，我的能力不够，找不到这个路径，请您惩罚我吧！{Style.RESET_ALL}")
             else:
                 # 读取文件夹中的所有文件
                 fileList = os.listdir(filePath)
@@ -48,7 +48,7 @@ def init():
                                 xlsFile.endswith(".xlsx") or xlsFile.endswith(".XLSX")):
                             xls_path = filePath + '\\' + xlsFile
                             print(
-                                f"{Fore.LIGHTBLACK_EX}{Style.BRIGHT}老婆大人，老公努力搞定：{xls_path}{Style.RESET_ALL}")
+                                f"{Fore.LIGHTBLACK_EX}{Style.BRIGHT}主人，奴仆努力搞定：{xls_path}{Style.RESET_ALL}")
 
                             # 创建一个新的工作簿（Workbook）对象
                             wb = load_workbook('./temp/demo.xlsx')
@@ -61,7 +61,7 @@ def init():
 
                             if worksheet:
                                 print()
-                                print(f"{Fore.CYAN}老公正在努力劳作，老婆您稍等......{Style.RESET_ALL}")
+                                print(f"{Fore.CYAN}奴仆正在努力劳作，主人您稍等......{Style.RESET_ALL}")
                                 print()
                                 # 创建一个对象并设置属性
                                 my_shipyard = common.row_object(6, 1)
@@ -93,18 +93,18 @@ def init():
                             save_path = filePath + "\\output\\" + "送审目录-" + file_name + ".xlsx"
                             wb.save(save_path)
 
-                            print(f"{Fore.LIGHTBLACK_EX}{Style.BRIGHT}老婆大人，老公搞定了：{xls_path}{Style.RESET_ALL}")
+                            print(f"{Fore.LIGHTBLACK_EX}{Style.BRIGHT}主人，奴仆搞定了：{xls_path}{Style.RESET_ALL}")
                             print()
                             print(
                                 f"{Fore.WHITE}----------------------------分割线----------------------------{Style.RESET_ALL}")
                             print()
                 else:
                     print(
-                        f"{Fore.RED}老婆大人，您真好，路径下面是空的，是不是担心老公太累了？{Style.RESET_ALL}")
+                        f"{Fore.RED}主人，您真好，路径下面是空的，是不是担心奴仆太累了？{Style.RESET_ALL}")
         except KeyboardInterrupt:
             raise KeyboardInterrupt
 
         except Exception as err:
             print(
-                f"{Fore.RED}老婆大人，不好了，老公的程序异常了，错误信息: ${err}{Style.RESET_ALL}")
+                f"{Fore.RED}主人，不好了，奴仆的程序异常了，错误信息: ${err}{Style.RESET_ALL}")
 
