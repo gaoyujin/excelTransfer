@@ -2,12 +2,43 @@ import os
 from openpyxl import load_workbook
 import common
 from colorama import Fore, Style, init
+import re
 
 init(autoreset=True)
 
 
 class FileName:
     pass
+
+
+def process_string(input_str):
+    """
+    处理字符串中特定模式的子串：
+    1. 以26个大写字母开头
+    2. 后跟'_S '、'_S_'或'_S'
+    将这些匹配的子串替换为空字符串
+    """
+    pattern = r'[A-Z]_S(?:_| |$)'
+    return re.sub(pattern, '', input_str)
+
+
+def process_filenames(filename):
+    if (filename.endswith(".dwg") or filename.endswith(".DWG") or
+        filename.endswith(".pdf") or filename.endswith(".PDF") or
+        filename.endswith(".xls") or filename.endswith(".XLS") or
+            filename.endswith(".xlsx") or filename.endswith(".XLSX")):
+        # 查找第一个"SC"出现的位置
+        sc_index = filename.find('SC')
+        if sc_index == -1:
+            sc_index = filename.find('sc')
+
+        if sc_index != -1:
+            new_name = filename[sc_index:]
+            return new_name
+        else:
+            return filename
+    else:
+        return filename
 
 
 def init():
@@ -56,7 +87,9 @@ def init():
                                 xlsFile.endswith(".xls") or xlsFile.endswith(".XLS") or
                                 xlsFile.endswith(".xlsx") or xlsFile.endswith(".XLSX")):
 
-                            file_name = common.get_file_name(xlsFile)
+                            new_xls_file = process_filenames(xlsFile)
+
+                            file_name = common.get_file_name(new_xls_file)
                             names = file_name.split("_")
 
                             if len(names) < 1:
@@ -69,9 +102,8 @@ def init():
                                 my_data = FileName()
                                 my_data.count = count
                                 my_data.account = names[0]
-                                my_data.name = (file_name.replace(names[0] + '_', '').
-                                                replace('A_S ', '').replace('A_S_', '').replace('A_S', ''))
-                                my_data.allName = xlsFile
+                                my_data.name = process_string(file_name.replace(names[0] + '_', ''))
+                                my_data.allName = new_xls_file
 
                                 last_data.append(my_data)
                                 count = count + 1
