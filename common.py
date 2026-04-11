@@ -106,3 +106,22 @@ def copy_row(sheet, obj, num):
 
     sheet.row_dimensions[obj.rowIndex + num].height = 25
 
+
+# 复制一行
+def copy_row_no_height(sheet, obj, num):
+    # 插入一行新的
+    source_row = sheet[obj.rowIndex]
+    # 插入行
+    for cell in source_row:
+        target_cell = sheet.cell(row=obj.rowIndex + num, column=cell.column)
+        target_cell.value = cell.value
+        # 设置单元格格式
+        target_cell.fill = copy.copy(cell.fill)
+
+        if cell.has_style:
+            # target_cell._style = copy.copy(cell._style)
+            target_cell.font = copy.copy(cell.font)
+            target_cell.border = copy.copy(cell.border)
+            target_cell.fill = copy.copy(cell.fill)
+            target_cell.alignment = copy.copy(cell.alignment)
+
