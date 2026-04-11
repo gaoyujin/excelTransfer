@@ -83,6 +83,8 @@ def write_row(sheet, row, obj, num):
         sheet['B' + str(obj.rowIndex - 2)] = row[2]
         sheet['C' + str(obj.rowIndex - 2)] = row[3]
         sheet['C' + str(obj.rowIndex - 1)] = row[4]
+        # 写入备注
+        sheet['F' + str(obj.rowIndex - 2)] = row[10]
         obj.count = obj.count + 1
 
 

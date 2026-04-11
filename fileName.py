@@ -7,6 +7,16 @@ from colorama import Fore, Style, init
 init(autoreset=True)
 
 
+def replace_us_space(text):
+    """
+    将字符串中的 '_S '（下划线+大写S+空格）统一替换为 '_'
+    适用于日志、标注数据等格式标准化场景
+    """
+    if not isinstance(text, str):
+        return text
+    return text.replace('_S ', '_')
+
+
 def clean_filename(filename):
     # 定义需要替换的特殊字符
     special_chars = ['+', '=', '&', '*', "'"]
@@ -20,7 +30,7 @@ def clean_filename(filename):
     while '  ' in cleaned_name:
         cleaned_name = cleaned_name.replace('  ', ' ')
     
-    return cleaned_name.strip()
+    return replace_us_space(cleaned_name.strip())
 
 
 def init():
